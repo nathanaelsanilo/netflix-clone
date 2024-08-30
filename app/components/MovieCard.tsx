@@ -2,12 +2,15 @@
 
 import Image from "next/image";
 import { BsFillPlayFill } from "react-icons/bs";
+import { SafeUser } from "../types";
+import FavoriteButton from "./FavoriteButton";
 
 type Props = {
+  currentUser?: SafeUser | null;
   data: Record<string, any>;
 };
 
-const MovieCard = ({ data }: Props) => {
+const MovieCard = ({ data, currentUser }: Props) => {
   return (
     <div className="group bg-zinc-900 col-span relative h-[12vw]">
       <Image
@@ -33,6 +36,7 @@ const MovieCard = ({ data }: Props) => {
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id} currentUser={currentUser} />
           </div>
 
           <p className="text-green-400 font-semibold mt-4">

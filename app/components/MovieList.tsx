@@ -1,16 +1,16 @@
 "use client";
 
 import { isEmpty } from "lodash";
-import useMovieList from "../hooks/useMovieList";
+import { SafeUser } from "../types";
 import MovieCard from "./MovieCard";
 
 type Props = {
   title: string;
+  data: Record<string, any>[];
+  currentUser?: SafeUser | null;
 };
 
-const MovieList = ({ title }: Props) => {
-  const { data } = useMovieList();
-
+const MovieList = ({ title, data, currentUser }: Props) => {
   if (isEmpty(data)) {
     return null;
   }
@@ -23,7 +23,7 @@ const MovieList = ({ title }: Props) => {
         </p>
         <div className="grid grid-cols-4 gap-2">
           {data.map((movie: any) => (
-            <MovieCard key={movie.id} data={movie} />
+            <MovieCard key={movie.id} data={movie} currentUser={currentUser} />
           ))}
         </div>
       </div>

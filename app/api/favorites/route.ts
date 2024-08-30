@@ -2,13 +2,19 @@ import prismadb from "@/app/lib/prismadb";
 import serverAuth from "@/app/lib/server-auth";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    await serverAuth();
+    const { currentUser } = await serverAuth();
 
-    const movies = await prismadb.movie.findMany();
+    const favoriteMovies = await prismadb.movie.findMany({
+      where: {
+        id: {
+          in: currentUser?.favoriteIds,
+        },
+      },
+    });
 
-    return NextResponse.json(movies);
+    return NextResponse.json(favoriteMovies);
   } catch (error) {
     console.log(error);
     return NextResponse.json(

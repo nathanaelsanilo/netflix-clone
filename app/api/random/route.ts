@@ -17,6 +17,9 @@ export async function GET(request: Request) {
     return NextResponse.json(randomMovies[0]);
   } catch (error) {
     console.log(error);
-    return NextResponse.json({}, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 400 }
+    );
   }
 }

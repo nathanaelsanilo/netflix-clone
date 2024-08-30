@@ -1,17 +1,17 @@
 import Billboard from "./components/Billboard";
-import MovieList from "./components/MovieList";
 import Navbar from "./components/Navbar";
 import serverAuth from "./lib/server-auth";
+import MovieListClient from "./MovieListClient";
 
 const Home = async () => {
-  await serverAuth();
+  const { currentUser } = await serverAuth();
 
   return (
     <>
       <Navbar />
       <Billboard />
       <div className="pb-40">
-        <MovieList title="Trending Now" />
+        <MovieListClient currentUser={currentUser} />
       </div>
     </>
   );
