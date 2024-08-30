@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import serverAuth from "./lib/server-auth";
+import Billboard from "./components/Billboard";
 
 const Home = async () => {
   const { currentUser } = await serverAuth();
@@ -7,6 +8,7 @@ const Home = async () => {
   return (
     <>
       <Navbar />
+      <Billboard />
     </>
   );
 };
