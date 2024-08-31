@@ -34,7 +34,7 @@ const FavoriteButton = ({ movieId, currentUser }: Props) => {
     mutateFavorites();
 
     router.refresh();
-  }, [movieId, isFavorite, currentUser, mutateFavorites]);
+  }, [movieId, isFavorite, mutateFavorites, router]);
 
   const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
 

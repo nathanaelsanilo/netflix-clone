@@ -7,6 +7,10 @@ export async function POST(request: Request) {
   try {
     const { currentUser } = await serverAuth();
 
+    if (!currentUser) {
+      return NextResponse.error();
+    }
+
     const body = await request.json();
     const { movieId } = body;
 
@@ -34,16 +38,17 @@ export async function POST(request: Request) {
     return NextResponse.json(user);
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
-      { error: "Something went wrong" },
-      { status: 400 }
-    );
+    return NextResponse.error();
   }
 }
 
 export async function DELETE(request: Request) {
   try {
     const { currentUser } = await serverAuth();
+
+    if (!currentUser) {
+      return NextResponse.error();
+    }
 
     const body = await request.json();
     const { movieId } = body;

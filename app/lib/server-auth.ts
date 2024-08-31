@@ -7,7 +7,7 @@ const serverAuth = async () => {
   const session = await getServerSession(authOptions);
 
   if (session === null || !session?.user?.email) {
-    throw new Error("Not sign in");
+    return { currentUser: null };
   }
 
   const currentUser = await prismadb.user.findUnique({
@@ -17,7 +17,7 @@ const serverAuth = async () => {
   });
 
   if (!currentUser) {
-    throw new Error("Not sign in");
+    return { currentUser: null };
   }
 
   const safeUser: SafeUser = {

@@ -7,6 +7,7 @@ import AccountMenu from "./AccountMenu";
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
 import { SafeUser } from "../types";
+import Link from "next/link";
 
 type Props = {
   currentUser?: SafeUser | null;
@@ -73,31 +74,42 @@ const Navbar = ({ currentUser }: Props) => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsSearch />
-          </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsBell />
-          </div>
-          <div
-            onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 cursor-pointer relative"
-          >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <Image
-                src="/images/default-blue.png"
-                alt="Profile"
-                width={100}
-                height={100}
-              />
-            </div>
-            <BsChevronDown
-              className={`text-white transition ${
-                showAccountMenu ? "rotate-180" : "rotate-0"
-              }`}
-            />
-            <AccountMenu visible={showAccountMenu} currentUser={currentUser} />
-          </div>
+          {currentUser ? (
+            <>
+              <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                <BsSearch />
+              </div>
+              <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                <BsBell />
+              </div>
+              <div
+                onClick={toggleAccountMenu}
+                className="flex flex-row items-center gap-2 cursor-pointer relative"
+              >
+                <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+                  <Image
+                    src="/images/default-blue.png"
+                    alt="Profile"
+                    width={100}
+                    height={100}
+                  />
+                </div>
+                <BsChevronDown
+                  className={`text-white transition ${
+                    showAccountMenu ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+                <AccountMenu
+                  visible={showAccountMenu}
+                  currentUser={currentUser}
+                />
+              </div>
+            </>
+          ) : (
+            <Link href={"/auth"} className="text-white cursor-pointer">
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
     </nav>

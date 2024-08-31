@@ -6,6 +6,10 @@ export async function GET() {
   try {
     const { currentUser } = await serverAuth();
 
+    if (!currentUser) {
+      return NextResponse.json([]);
+    }
+
     const favoriteMovies = await prismadb.movie.findMany({
       where: {
         id: {

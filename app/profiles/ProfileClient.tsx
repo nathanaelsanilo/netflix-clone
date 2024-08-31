@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { SafeUser } from "../types";
 
 type Props = {
-  currentUser: SafeUser;
+  currentUser?: SafeUser | null;
 };
 
 const ProfileClient = ({ currentUser }: Props) => {
@@ -30,7 +30,7 @@ const ProfileClient = ({ currentUser }: Props) => {
               </div>
 
               <div className="mt-4 text-gray-400 text-2xl text-center group-hover:text-white">
-                {currentUser.name}
+                {currentUser?.name}
               </div>
             </div>
           </div>
