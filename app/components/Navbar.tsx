@@ -6,12 +6,15 @@ import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 import AccountMenu from "./AccountMenu";
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
+import { SafeUser } from "../types";
 
-type Props = {};
+type Props = {
+  currentUser?: SafeUser | null;
+};
 
 const TOP_OFFSET = 66;
 
-const Navbar = (props: Props) => {
+const Navbar = ({ currentUser }: Props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
@@ -93,7 +96,7 @@ const Navbar = (props: Props) => {
                 showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
             />
-            <AccountMenu visible={showAccountMenu} />
+            <AccountMenu visible={showAccountMenu} currentUser={currentUser} />
           </div>
         </div>
       </div>

@@ -2,12 +2,14 @@
 
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { SafeUser } from "../types";
 
 type Props = {
   visible?: boolean;
+  currentUser?: SafeUser | null;
 };
 
-const AccountMenu = ({ visible }: Props) => {
+const AccountMenu = ({ visible, currentUser }: Props) => {
   if (!visible) {
     return null;
   }
@@ -24,7 +26,7 @@ const AccountMenu = ({ visible }: Props) => {
             className="rounded-md"
           />
           <p className="text-white text-sm group-hover/item:underline">
-            Username
+            {currentUser?.name}
           </p>
         </div>
         <hr className="bg-gray-600 border h-px my-4" />
